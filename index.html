@@ -183,7 +183,7 @@ figure.photo figcaption b{color:var(--ink);font-weight:600}
 
 /* ================= immersive green bands ================= */
 .scrolly{position:relative;margin:2.5rem 0;background:var(--green)}
-.sticky{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;
+.sticky{position:sticky;top:0;height:100vh;height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;
   z-index:1;background:var(--green);padding-bottom:7vh;overflow:hidden}
 .sticky .stage{width:100%;max-width:1040px;padding:0 18px}
 .scrolly .gtitle{color:var(--cream-ink)}
@@ -191,8 +191,8 @@ figure.photo figcaption b{color:var(--ink);font-weight:600}
 .scrolly .gnote{color:var(--cream-mut)}
 .scrolly .gnote b{color:var(--cream-ink)}
 .steps{position:relative;z-index:5;pointer-events:none}
-.step{min-height:88vh;display:flex;align-items:flex-end;justify-content:center;padding:0 16px 9vh}
-.step:last-child{min-height:100vh}
+.step{min-height:88vh;min-height:88svh;display:flex;align-items:flex-end;justify-content:center;padding:0 16px 9vh}
+.step:last-child{min-height:100vh;min-height:100svh}
 .step .card{pointer-events:auto;width:min(560px,100%);background:var(--cream);color:var(--ink);
   box-shadow:0 2px 4px rgba(20,24,10,.25),0 10px 30px rgba(20,24,10,.3);
   padding:1.35rem 1.35rem 1.15rem;font-family:var(--frank);font-size:.95rem;line-height:1.56}
@@ -639,7 +639,7 @@ footer .fin{font-family:var(--disp);font-weight:600;color:var(--coral);margin-to
 <section class="act" id="act4">
   <div class="col">
     <div class="shead"><div class="echo" aria-hidden="true" data-i18n="e4"><span>The Jump</span><span>The Jump</span><span class="fill">The Jump</span><span>The Jump</span><span>The Jump</span></div><span class="tag" data-i18n="t4"><span>Part 4 · The result</span></span><h2 data-i18n="hh4">Sixty years later, the language had moved</h2></div>
-    <p data-i18n="a4p1">Now the payoff. The schools open in the 1830s; the Atlas listens in 1900, two generations later, to what people <em>actually speak at home</em> — not what children recite in class. Put the 577 Atlas villages on the same twin-villages scale, and peel the onion one layer at a time.</p>
+    <p data-i18n="a4p1">This is what it was all for. The schools open in the 1830s; the Atlas listens in 1900 — two generations later — to what people <em>actually speak at home</em>, not what children recite in class. Put the 577 Atlas villages on the twin-villages scale, and strip the comparison bare one layer at a time.</p>
   </div>
   <div class="scrolly" id="scrolly-rd2">
     <div class="sticky"><div class="stage">
@@ -670,7 +670,7 @@ footer .fin{font-family:var(--disp);font-weight:600;color:var(--coral);margin-to
   <div class="wide">
     <figure class="fig">
       <div class="ghead">
-        <div class="gtitle" data-i18n="gh_ref">Where “French” came from</div>
+        <div class="gtitle" data-i18n="gh_ref">The French they learned was the elites’ French</div>
         <div class="gsub" data-i18n="gs_ref">The effect at 500, re-estimated with every Atlas town as the reference language, mapped at the reference town — the paper’s Figure 12</div>
       </div>
       <div id="refmapwrap" style="display:flex;justify-content:center"><canvas id="refmap" style="max-width:100%;max-height:78vh;width:auto;height:auto"></canvas></div>
@@ -854,7 +854,7 @@ const FR_HTML = {
 "e4": "<span>Le Saut</span><span>Le Saut</span><span class=\"fill\">Le Saut</span><span>Le Saut</span><span>Le Saut</span>",
 "t4": "<span>Partie 4 · Le résultat</span>",
 "hh4": "Soixante ans plus tard, la langue avait bougé",
-"a4p1": "Voici la récompense. Les écoles ouvrent dans les années 1830&nbsp;; l’Atlas écoute en 1900, deux générations plus tard, ce que les gens <em>parlent vraiment chez eux</em> — pas ce que les enfants récitent en classe. Placez les 577 villages de l’Atlas sur la même échelle des villages jumeaux, et pelez l’oignon couche par couche.",
+"a4p1": "Voici à quoi tout cela menait. Les écoles ouvrent dans les années 1830&nbsp;; l’Atlas écoute en 1900 — deux générations plus tard — ce que les gens <em>parlent réellement chez eux</em>, et non ce que les enfants récitent en classe. Placez les 577 villages de l’Atlas sur l’échelle des villages jumeaux, et mettez la comparaison à nu, une couche à la fois.",
 "c_sc": "<span class=\"stepno\">Couche 1 · Les villages bruts</span>\n        <p>Chaque village de l’Atlas selon sa population de 1836&nbsp;; la hauteur est la distance au français en 1900. Un nuage. Les comparaisons brutes trompent — les gros villages étaient plus loin de Paris, et le Midi compte moins de villages près du seuil.</p>",
 "c_bin": "<span class=\"stepno\">Couche 2 · Groupez les jumelles</span>\n        <p>Moyennez les villages par classes de taille voisine et ajustez une courbe de chaque côté. Un écart s’ouvre à 500&nbsp;: <span class=\"num\">−0,09</span>. Mais l’écart brut vient avec une large incertitude.</p>",
 "c_ctl": "<span class=\"stepno\">Couche 3 · À conditions égales</span>\n        <p>Comparez maintenant des villages du même département et du même dialecte historique, à la même distance de Paris — la spécification de la figure 10 de l’article. L’écart s’affine&nbsp;: <span class=\"num\">−0,10 (é.-t. 0,02)</span>. Une ligne administrative, dix points de langue.</p>",
@@ -862,7 +862,7 @@ const FR_HTML = {
 "c_pb1": "<span class=\"stepno\">Et si 500 était un hasard&nbsp;? Déplacez le seuil</span>\n        <p>Relancez tout l’exercice en faisant comme si le seuil de la loi était à 300, 310, … 700. Seul le vrai seuil produit le saut. <strong>Quand le graphique s’arrête, faites glisser le curseur vous-même.</strong></p>",
 "c_pb2": "<span class=\"stepno\">…et déplacez l’année</span>\n        <p>Mesurez la population à n’importe quelle autre décennie du siècle plutôt qu’en 1836. Le saut n’apparaît qu’autour de <span class=\"num\">1831–1836</span> — quand les deux lois mordent. Sur <span class=\"num\">400+</span> régressions placebo couvrant tous les résultats de l’article, 95&nbsp;% des estimations au vrai seuil sont significatives, contre 9&nbsp;% aux faux seuils et 9&nbsp;% aux fausses années.</p>",
 "a4p2": "Un dernier tour de cadran — le plus élégant. Au lieu de déplacer le seuil ou l’année, changez ce qui compte comme «&nbsp;<strong>français</strong>&nbsp;»&nbsp;: recalculez la distance linguistique de chaque village en prenant tour à tour chacune des <span class=\"num\">577</span> communes de l’Atlas comme référence, et relancez l’expérience à chaque fois. Si les écoles enseignaient le français des élites, les villages au-dessus du seuil ne devraient converger que vers le parler des lieux où ce français se parlait vraiment.",
-"gh_ref": "D’où vient le «&nbsp;français&nbsp;»",
+"gh_ref": "Le français qu’ils ont appris était celui des élites",
 "gs_ref": "L’effet au seuil de 500, réestimé avec chaque commune de l’Atlas comme langue de référence, cartographié à la commune de référence — la figure 12 de l’article",
 "e5": "<span>Pourquoi oui&nbsp;?</span><span>Pourquoi oui&nbsp;?</span><span class=\"fill\">Pourquoi oui&nbsp;?</span><span>Pourquoi oui&nbsp;?</span><span>Pourquoi oui&nbsp;?</span>",
 "t5": "<span>Partie 5 · Pourquoi ça a marché</span>",
