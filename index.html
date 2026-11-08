@@ -389,6 +389,29 @@ footer .fin{font-family:var(--disp);font-weight:600;color:var(--coral);margin-to
 .vocab-grid{display:block}.vocab-grid #vocab-chart{max-width:760px;margin:0 auto}
 
 .ai-credit{font-family:var(--disp);font-size:.78rem;line-height:1.55;color:var(--muted);max-width:760px;margin:.55rem auto 0}.ai-credit strong{font-weight:700}
+/* Same two-panel width, gap and one-column breakpoint as .quartet. */
+.lp-pair{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:1.8rem 2.6rem;
+  max-width:none;
+  margin:0;
+  align-items:start;
+}
+.lp-pair > figure.fig{margin:0;min-width:0}
+/* One centred panel exactly as wide as one .quartet column. */
+.vocab-grid{
+  display:block;
+  width:calc((100% - 2.6rem) / 2);
+  max-width:none;
+  margin:0 auto;
+}
+.vocab-grid #vocab-chart{width:100%;max-width:none;margin:0}
+@media(max-width:760px){
+  .lp-pair{grid-template-columns:minmax(0,1fr)}
+  .vocab-grid{width:100%}
+}
+
 </style>
 </head>
 <body data-palette="#8867c0,#cf5220,#cf9a25">
@@ -499,7 +522,7 @@ footer .fin{font-family:var(--disp);font-weight:600;color:var(--coral);margin-to
     <h3 class="kicker2" data-i18n="k2a">1831 — who runs the village</h3>
     <p data-i18n="a2p2">Village councils could be family affairs. In 1835, an Aube prefect described councilors who “are all relatives or allies.” The Municipal Law of 1831 introduced elections. At <strong>500 inhabitants or more</strong>, it also barred close relatives from serving together and expanded the council from ten to twelve seats.</p>
     <h3 class="kicker2" data-i18n="k2b">1833 — every commune must provide a school</h3>
-    <p data-i18n="a2p3">In 1833, Guizot required <strong>every commune</strong>, alone or with neighbors, to maintain a boys’ primary school teaching reading, French, and moral and religious instruction. But the council had to vote the money. Who sat on it mattered.</p>
+    <p data-i18n="a2p3">In 1833, Guizot required <strong>every commune</strong>, alone or with neighbors, to maintain a boys’ primary school teaching reading, French, and moral and religious instruction. Councils had to vote the funds and make the schools work: put the curriculum into practice and nominate teachers for approval. Who sat on them mattered.</p>
     <blockquote class="pull" data-i18n="q_lorain">Each school is “a colony of French language in a conquered land.”
       <span class="who">Pierre Lorain, collaborator of Guizot, 1837</span></blockquote>
     <div class="stats">
@@ -718,7 +741,7 @@ const FR_HTML = {
   "a2note": "La <strong>loi municipale</strong> fixe le seuil de 500 habitants ; toutes les communes doivent entretenir une école. Nous mesurons donc ensemble la réforme politique et la scolarisation qu’elle a favorisée.",
   "a2p1": "Les célèbres lois scolaires des années 1880 viendront plus tard. La première grande vague d’ouvertures d’écoles rurales commence un demi-siècle auparavant, sous Louis-Philippe. Deux lois de sa <strong>monarchie de Juillet</strong> changent le gouvernement des villages et l’école.",
   "a2p2": "Les conseils municipaux peuvent être des affaires de famille. En 1835, un préfet de l’Aube décrit des conseillers « tous parents ou alliés ». La loi municipale de 1831 introduit des élections. À partir de <strong>500 habitants</strong>, elle interdit aussi à de proches parents de siéger ensemble et porte le conseil de dix à douze membres.",
-  "a2p3": "En 1833, Guizot impose à <strong>chaque commune</strong>, seule ou avec ses voisines, d’entretenir une école primaire de garçons enseignant la lecture, le français et l’instruction morale et religieuse. Mais le conseil doit voter les crédits. Sa composition compte.",
+  "a2p3": "En 1833, Guizot impose à <strong>chaque commune</strong>, seule ou avec ses voisines, d’entretenir une école primaire de garçons enseignant la lecture, le français et l’instruction morale et religieuse. Aux conseils de voter les crédits et de faire fonctionner les écoles : appliquer le programme et proposer les maîtres à l’agrément des autorités. Qui y siège compte donc.",
   "a2p4": "Juste au-dessous et au-dessus de 500 habitants, les communes ont presque la même taille, mais leurs conseils suivent des règles différentes. Si les autres influences sur la langue varient sans rupture avec la population, un écart soudain à 500 révèle l’effet des réformes. C’est le principe de la <strong>régression sur discontinuité</strong>.",
   "a3p1": "Les archives permettent de suivre la suite : qui devient maire, si les conseils votent les crédits, quelles écoles ouvrent et si le manuel de l’État y arrive.",
   "a4p1": "Plus de soixante ans après la loi Guizot, Edmont relève les parlers de part et d’autre de l’ancien seuil de 500 habitants. S’étaient-ils rapprochés du français ? Partons des villages, puis tenons compte de leurs différences.",
@@ -894,6 +917,10 @@ function showTip(html, x, y) {
   tip.style.top = (y - 14) + "px";
 }
 function hideTip() { tip.style.opacity = 0; }
+addEventListener("scroll", hideTip, { passive: true });
+addEventListener("touchmove", hideTip, { passive: true });
+addEventListener("resize", hideTip, { passive: true });
+addEventListener("blur", hideTip);
 
 function hex2rgb(h) { return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]; }
 function mix(h, target, t) { // blend hex color toward target rgb array
@@ -1423,14 +1450,16 @@ function drawRefMap() {
   cx.fillStyle = "#f4eeda";
   for (const poly of M.france) { path(poly); cx.fill(); }
   const FX = {}; for (const o of R.reffx) FX[o.p] = o;
-  /* five classes, cream \u2192 coral: deeper = stronger convergence */
-  const EDGES = [-0.07, -0.05, -0.03, 0];
-  const SHADES = ["#b23e05", "#d3661d", "#ea9448", "#f6cd96", "#fdf4e2"];
-  const LABELS = ["\u22120.09 \u2013 \u22120.07", "\u22120.07 \u2013 \u22120.05",
-                  "\u22120.05 \u2013 \u22120.03", "\u22120.03 \u2013 0.00", "0.00 \u2013 0.05"];
-  const shade = t => { let k = 0; while (k < EDGES.length && t >= EDGES[k]) k++; return SHADES[k]; };
-  const insig = o => Math.abs(o.tau / o.se) <= 1.645;
-  const GREEN60 = "rgba(122,134,84,.3)"; // green overlay: no significant effect
+  /* Paper effect-size groups, with the website’s cream-to-coral palette. */
+  const EDGES = [-0.065, -0.055, -0.045, -0.03, 0.0, 0.02, 0.04];
+  const SHADES = ["#b23e05", "#c85416", "#d9722c", "#e99448", "#f0b36f", "#f6ce98", "#fae3be", "#fdf4e2"];
+  const LABELS = ["−0.110 – −0.065", "−0.065 – −0.055", "−0.055 – −0.045", "−0.045 – −0.030", "−0.030 – 0.000", "0.000 – 0.020", "0.020 – 0.040", "0.040 – 0.060"];
+  const shade = t => {
+    if (!Number.isFinite(t) || t < -0.110 || t > 0.060) throw new Error("Reference-map estimate outside paper's range");
+    let k = 0; while (k < EDGES.length && t > EDGES[k]) k++; return SHADES[k];
+  };
+  const insig = o => Math.abs(o.tau / o.se) < 1.6448536269514722;
+  const GREEN60 = "rgba(122,134,84,.3)"; // website green overlay for estimates not significant at 10%
   // fills: every coefficient on the cream\u2192coral ramp\u2026
   M.villages.forEach(v => {
     const o = FX[v.p], cell = M.cells[String(v.p)];
@@ -1438,7 +1467,7 @@ function drawRefMap() {
     cx.fillStyle = shade(o.tau);
     for (const poly of cell) { path(poly); cx.fill(); }
   });
-  // \u2026then a green wash at 60% where the estimate is not significant at 10%
+  // A green wash marks estimates not significant at 10%.
   M.villages.forEach(v => {
     const o = FX[v.p], cell = M.cells[String(v.p)];
     if (!o || !cell || !insig(o)) return;
@@ -1536,8 +1565,8 @@ function drawRefMap() {
   const shown = M.villages.filter(v => FX[v.p] && M.cells[String(v.p)]);
   const nsig = shown.filter(v => !insig(FX[v.p]) && FX[v.p].tau < 0).length;
   const el = $("#refnote");
-  if (el) el.innerHTML = T(`This map compares how much speech moved toward each reference town. Darker coral means more convergence; green marks estimates not significant at 10%. Of 577 reference towns, ${shown.length} are mapped and 25 are unlocated; ${nsig} mapped towns show significant convergence, concentrated in the Paris Basin and Loire Valley. Local linear fits use mean-squared-error optimal bandwidths. Hover for estimates and uncertainty.`,
-    `Cette carte compare le rapprochement vers le parler de chaque commune de référence. Un corail plus foncé indique un rapprochement plus marqué ; le vert signale une estimation non significative à 10 %. Sur 577 communes de référence, ${shown.length} sont cartographiées et 25 ne sont pas localisées ; ${nsig} communes cartographiées montrent une convergence significative, concentrée dans le Bassin parisien et le Val de Loire. Les ajustements linéaires locaux utilisent des fenêtres optimales au sens de l’erreur quadratique moyenne. Survolez pour voir les estimations et leur incertitude.`);
+  if (el) el.innerHTML = T(`This map compares how much speech moved toward each reference town. Darker coral means more convergence; green marks estimates not significant at 10%. Of 577 reference towns, ${shown.length} are mapped and 25 are unlocated; ${nsig} mapped towns show significant convergence, concentrated in the Paris Basin and Loire Valley. Local linear fits reuse the bandwidth selected for distance from French. Hover for estimates and uncertainty.`,
+    `Cette carte compare le rapprochement vers le parler de chaque commune de référence. Un corail plus foncé indique un rapprochement plus marqué ; le vert signale une estimation non significative à 10 %. Sur 577 communes de référence, ${shown.length} sont cartographiées et 25 ne sont pas localisées ; ${nsig} communes cartographiées montrent une convergence significative, concentrée dans le Bassin parisien et le Val de Loire. Les ajustements linéaires locaux réutilisent la fenêtre choisie pour la distance au français. Survolez pour voir les estimations et leur incertitude.`);
 }
 
 /* ============ tiny SVG toolkit ============ */
@@ -1680,8 +1709,8 @@ class RDChart {
         "font-size": o.small ? 11.5 : 14.5, "font-weight": 700,
         "font-family": "var(--frank)", fill: C.acc, stroke: C.halo,
         "stroke-width": 3.2, "paint-order": "stroke" }, fadeGroup);
-      t.textContent = Math.abs(st.tau) < 0.02 ? "≈ 0"
-        : `${st.tau > 0 ? "+" : ""}${st.tau.toFixed(2)}`;
+      const digits = Math.abs(st.tau) > 0 && Math.abs(st.tau) < 0.005 ? 3 : 2;
+      t.textContent = `${st.tau > 0 ? "+" : ""}${st.tau.toFixed(digits)}`;
     }
     if (!REDUCED) requestAnimationFrame(() => {
       fadeGroup.style.transition = "opacity .45s ease";
@@ -2043,6 +2072,28 @@ function pairBars(div, pair, opts) {
     rect.addEventListener("mouseleave", hideTip);
   });
 }
+
+/* Keep the shared pairBars function unchanged. This wrapper makes the three
+   language figures use its existing heterogeneity dimensions and treatment. */
+function languagePairBars(div, pair, opts) {
+  const target = typeof div === "string" ? $(div) : div;
+  if (!target) return;
+  const o = Object.assign({}, opts, { w: 300, h: 240, ml: 46 });
+  pairBars(target, pair, o);
+  if (!o.labelLines) return;
+  o.labelLines.forEach((lines, i) => {
+    const label = Array.from(target.querySelectorAll("svg text"))
+      .find(node => node.textContent === o.labels[i]);
+    if (!label || !lines.length) return;
+    const x = label.getAttribute("x");
+    label.setAttribute("y", Number(label.getAttribute("y")) - (lines.length - 1) * 6);
+    label.textContent = "";
+    lines.forEach((line, j) => {
+      E("tspan", { x, dy: j ? 14 : 0 }, label).textContent = line;
+    });
+  });
+}
+
 
 /* ============ scroller ============ */
 function scroller(stepsSel, cb) {
@@ -2410,8 +2461,8 @@ window.addEventListener("DOMContentLoaded", () => {
     // same beige/coral pair as every other paired-bar figure on the page
     const rcol = { labels: ["Oïl",T("South*", "Sud*")] };
 
-    pairBars("#lp-lex", [LP.similarity_226[0], LP.similarity_226[1]], Object.assign({ verdict: T("French words adopted", "des mots français adoptés") }, rcol));
-    pairBars("#lp-pho", [LP.phonetic[0], LP.phonetic[1]], Object.assign({ verdict: T("a residual, not pure accent", "un résidu, pas le seul accent") }, rcol));
+    languagePairBars("#lp-lex", [LP.similarity_226[0], LP.similarity_226[1]], Object.assign({ verdict: T("French words adopted", "des mots français adoptés") }, rcol));
+    languagePairBars("#lp-pho", [LP.phonetic[0], LP.phonetic[1]], Object.assign({ verdict: T("a residual, not pure accent", "un résidu, pas le seul accent") }, rcol));
     const NB = R.nationbuilding;
     new RDChart("#nb-medals", { small: true }).show(rdState(NB.medals, { ylab: T("≥1 Résistance medal", "≥1 médaille de la Résistance"), xlab: "Population" }));
     new RDChart("#nb-nazis", { small: true }).show(rdState(NB.nazis, { ylab: T("≥1 collaborator", "≥1 collaborateur"), xlab: "Population" }));
@@ -2420,8 +2471,12 @@ window.addEventListener("DOMContentLoaded", () => {
   const originalRenderBars = renderBars;
   renderBars = function(){
     originalRenderBars();
-    if(R.worddomains && $("#vocab-chart")) pairBars("#vocab-chart",R.worddomains,{
-      labels:[T("Individuals / actions (16)","Individus / actions (16)"),T("Environment (14)","Environnement (14)")],w:640,h:340,ml:58});
+    if (R.worddomains && $("#vocab-chart")) languagePairBars("#vocab-chart", R.worddomains, {
+      labels: [T("Individuals / actions (16)", "Individus / actions (16)"),
+               T("Environment (14)", "Environnement (14)")],
+      labelLines: [[T("Individuals /", "Individus /"), T("actions (16)", "actions (16)")],
+                   [T("Natural environment", "Environnement naturel"), T("(14 words)", "(14 mots)")]]
+    });
   };
   renderBars();
 
