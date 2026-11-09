@@ -399,17 +399,24 @@ footer .fin{font-family:var(--disp);font-weight:600;color:var(--coral);margin-to
   align-items:start;
 }
 .lp-pair > figure.fig{margin:0;min-width:0}
-/* One centred panel exactly as wide as one .quartet column. */
+/* Vocabulary estimates and the documentary school photograph. */
 .vocab-grid{
-  display:block;
-  width:calc((100% - 2.6rem) / 2);
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  gap:1.8rem 2.6rem;
+  width:100%;
   max-width:none;
-  margin:0 auto;
+  margin:0;
+  align-items:center;
 }
+.vocab-grid > *{min-width:0}
 .vocab-grid #vocab-chart{width:100%;max-width:none;margin:0}
+.vocab-photo{margin:0}
+.vocab-photo img{display:block;width:100%;height:auto}
+#vocabulary{scroll-margin-top:100px}
 @media(max-width:760px){
   .lp-pair{grid-template-columns:minmax(0,1fr)}
-  .vocab-grid{width:100%}
+  .vocab-grid{grid-template-columns:minmax(0,1fr)}
 }
 
 
@@ -703,7 +710,7 @@ figcaption b,figcaption strong{font-weight:600;color:inherit}
       </div>
       <div class="gnote" data-i18n="gn_lp">This figure compares French vocabulary and residual phonetic distance. The southern sample has 21 communes: 15 Occitan and 6 Francoprovençal. Whiskers show conventional 90/95/99% confidence intervals. The phonetic residual can also reflect vocabulary changes.</div>
     </figure>
-  </div><div class="col"><h3 class="kicker2" data-i18n="k5c">The vocabulary of assimilation</h3><p data-i18n="a5p4"><i>Mouth, hand, drink, know</i>: words for individuals and actions moved closer to French than words such as <i>sky, water, forest</i>, and <i>rain</i>. The groups contain 16 and 14 words. All six versions of the analysis give this ordering, but the gap between groups is not always statistically clear.</p></div><div class="wide"><figure class="fig"><div class="ghead"><div class="gtitle" data-i18n="gh_vocab">Which words moved toward French?</div><div class="gsub" data-i18n="gs_vocab">Distance from French: Individuals and actions (16 words) vs. Natural environment (14 words) · RD estimates and 90/95/99% confidence intervals</div></div><div class="vocab-grid"><div id="vocab-chart"></div></div><div class="gnote" data-i18n="gn_vocab">This figure compares estimates for 16 Individuals and actions words and 14 Natural environment words. Linear fits without controls use the main bandwidth; intervals are conventional 90/95/99%. The group difference is not significant in every specification.</div></figure></div><div class="col"><p data-i18n="a5p5">The primer offers a clue. Alongside religion and morals, children read about the body, measures, useful knowledge, and machines. Man excelled, it said, “through intelligence and speech,” and grew stronger with machines. Such lessons could shape <strong>bodies, and brains</strong> and develop <strong>individual capacities and agency</strong>. The word pattern fits those lessons, but cannot show they caused it. Nor did words used more often in the textbook consistently move closer to French.</p><h3 class="kicker2" data-i18n="k5a">Why did families choose school?</h3><p data-i18n="a5p2">Guizot obliged communes to provide schools, not families to send their children. French spread more where <i>Encyclopédie</i> subscribers lived, enrollment grew faster, and railways opened access to the wider economy. Income alone shows no such clear pattern. These comparisons involve few communes, but suggest that schooling worked better when families wanted it and stood to gain.</p></div><div class="wide">
+  </div><div class="col"><h3 class="kicker2" data-i18n="k5c">The vocabulary of assimilation</h3><p data-i18n="a5p4"><i>Mouth, hand, blood, drink, spit</i>: words for individuals, the body, and actions moved closer to French than words such as <i>sky, water, forest</i>, and <i>rain</i>. The groups contain 16 and 14 words. All six versions of the analysis give this ordering, but the gap between groups is not always statistically clear.</p><p data-i18n="a5p_school">At the former school in Ayguatébia, two instructions share a wall: “Speak French” and “Be clean.”</p></div><div class="wide" id="vocabulary"><figure class="fig"><div class="ghead"><div class="gtitle" data-i18n="gh_vocab">Which words moved toward French?</div><div class="gsub" data-i18n="gs_vocab">Distance from French: Individuals, the body, and actions (16 words) vs. Natural environment (14 words) · RD estimates and 90/95/99% confidence intervals</div></div><div class="vocab-grid"><div id="vocab-chart"></div><figure class="photo vocab-photo"><img src="https://french.guillaumeblanc.com/images/ayguatebia-school.jpg" alt="Inscription in the former school at Ayguatébia: Parlez français / Soyez propres — Speak French / Be clean" loading="lazy" width="3476" height="2491"><figcaption data-i18n="cap_school">Inscription at the former school in Ayguatébia. Photograph published by <a href="https://homenatgecala.wordpress.com/2013/08/15/soyez-propres-parlez-francais-sigueu-nets-parleu-frances/" target="_blank" rel="noopener">Llavors de llibertat, 15 August 2013</a>.</figcaption></figure></div><div class="gnote" data-i18n="gn_vocab">This figure pairs the vocabulary estimates with the inscription at the former school in Ayguatébia. The groups contain 16 words about individuals, the body, and actions and 14 about the natural environment. Linear fits without controls use the main bandwidth; intervals are conventional 90/95/99%. The group difference is not significant in every specification.</div></figure></div><div class="col"><p data-i18n="a5p5">The primer offers a clue. Alongside religion and morals, children read about the body, measures, useful knowledge, and machines. Man excelled, it said, “through intelligence and speech,” and grew stronger with machines. Such lessons could shape <strong>bodies, and brains</strong> and develop <strong>individual capacities and agency</strong>. The word pattern fits those lessons, but cannot show they caused it. Nor did words used more often in the textbook consistently move closer to French.</p><h3 class="kicker2" data-i18n="k5a">Why did families choose school?</h3><p data-i18n="a5p2">Guizot obliged communes to provide schools, not families to send their children. French spread more where <i>Encyclopédie</i> subscribers lived, enrollment grew faster, and railways opened access to the wider economy. Income alone shows no such clear pattern. These comparisons involve few communes, but suggest that schooling worked better when families wanted it and stood to gain.</p></div><div class="wide">
     <figure class="fig">
       <div class="ghead">
         <div class="gtitle" data-i18n="gh_het">Where did speech change most?</div>
@@ -779,7 +786,9 @@ const FR_HTML = {
   "a5p1": "Le français ne s’est pas diffusé partout de la même façon. Les différences entre régions et entre mots éclairent ce que l’école a changé et pourquoi les familles l’ont choisie.",
   "a5p2": "Guizot oblige les communes à offrir des écoles, pas les familles à y envoyer leurs enfants. Le français se diffuse davantage là où vivent des souscripteurs de l’<i>Encyclopédie</i>, où les effectifs scolaires augmentent plus vite et où le chemin de fer ouvre l’accès à une économie plus large. Le revenu seul ne dessine pas de profil aussi net. Ces comparaisons portent sur peu de communes, mais suggèrent que l’école réussissait mieux quand les familles la souhaitaient et avaient à y gagner.",
   "a5p3": "Dans le sud majoritairement occitan, les communes au-dessus de 500 emploient environ <span class=\"num\">25 points</span> de mots français supplémentaires, mais l’estimation est imprécise. Dans le nord d’<i>oïl</i>, le changement apparaît davantage dans la prononciation. La mesure phonétique reflète aussi des changements de vocabulaire : elle n’isole pas l’accent.",
-  "a5p4": "<i>Bouche, main, boire, savoir</i> : les mots des individus et des actions se rapprochent davantage du français que des mots comme <i>ciel, eau, forêt</i> et <i>pluie</i>. Les groupes comptent 16 et 14 mots. Les six versions de l’analyse donnent cet ordre, mais l’écart entre groupes n’est pas toujours statistiquement net.",
+  "a5p4": "<i>Bouche, main, sang, boire, cracher</i> : les mots des individus, du corps et des actions se rapprochent davantage du français que des mots comme <i>ciel, eau, forêt</i> et <i>pluie</i>. Les groupes comptent 16 et 14 mots. Les six versions de l’analyse donnent cet ordre, mais l’écart entre groupes n’est pas toujours statistiquement net.",
+  "a5p_school": "Sur le mur de l’ancienne école d’Ayguatébia, deux consignes se côtoient : « Parlez français » et « Soyez propres ».",
+  "cap_school": "Inscription sur le mur de l’ancienne école d’Ayguatébia. Photographie publiée par <a href=\"https://homenatgecala.wordpress.com/2013/08/15/soyez-propres-parlez-francais-sigueu-nets-parleu-frances/\" target=\"_blank\" rel=\"noopener\">Llavors de llibertat, le 15 août 2013</a>.",
   "a5p5": "Le manuel offre un indice. Avec la religion et la morale, les enfants y découvrent le corps, les mesures, les savoirs utiles et les machines. L’homme y excelle « par l’intelligence et la parole » et accroît sa force avec les machines. Ces leçons pouvaient façonner les <strong>corps et les cerveaux</strong> et développer les <strong>capacités individuelles et la faculté d’agir</strong>. Le profil des mots concorde avec ces leçons, sans montrer qu’elles l’ont causé. Les mots plus fréquents dans le manuel ne se rapprochent pas non plus systématiquement davantage du français.",
   "a6p1": "Les traces ultérieures sont contrastées. Les communes au-dessus de l’ancien seuil sont plus souvent le lieu de naissance d’un médaillé de la Résistance. Les estimations pour les naissances de collaborateurs et le soutien à la régionalisation en 1969 sont négatives, mais restent indiscernables de zéro. Ces résultats suggèrent des effets durables des réformes, sans montrer que la langue seule aurait changé l’identité nationale.",
   "a6p2": "Les langues régionales perdent du terrain. En 1838, Stendhal écrit : « Toutes les nuances disparaissent constamment en France. Dans cinquante ans, il n’y aura peut-être plus ni Provençaux ni langue provençale. » Le provençal de <i>Mirèio</i>, de Mistral, est aujourd’hui menacé, comme presque tous les parlers de la première carte.",
@@ -844,13 +853,13 @@ const FR_HTML = {
   "gn_het": "Cette figure compare les effets linguistiques selon le savoir, le revenu, les effectifs scolaires et le chemin de fer. Les petits échantillons et les intervalles larges rendent ces contrastes suggestifs.",
   "gn_lp": "Cette figure compare le vocabulaire français et la distance phonétique résiduelle. L’échantillon du sud compte 21 communes : 15 occitanes et 6 francoprovençales. Les moustaches donnent les intervalles conventionnels à 90/95/99 %. Le résidu phonétique peut aussi refléter les changements de vocabulaire.",
   "gn_nb": "Cette figure compare les lieux de naissance des médaillés de la Résistance, ceux des collaborateurs et les votes pour la régionalisation. La population est mesurée en 1836. Seule l’estimation pour la Résistance est significative. Les deux autres restent incertaines avec l’inférence conventionnelle comme avec la correction robuste du biais.",
-  "gn_vocab": "Cette figure compare les estimations pour 16 mots sur les individus et les actions et 14 mots sur le milieu naturel. Les ajustements linéaires sans contrôles utilisent la fenêtre principale ; les intervalles conventionnels sont à 90/95/99 %. L’écart entre groupes n’est pas significatif dans toutes les spécifications.",
+  "gn_vocab": "Cette figure associe les estimations par type de mots à l’inscription de l’ancienne école d’Ayguatébia. Les groupes comptent 16 mots sur les individus, le corps et les actions et 14 sur le milieu naturel. Les ajustements linéaires sans contrôles utilisent la fenêtre principale ; les intervalles conventionnels sont à 90/95/99 %. L’écart entre groupes n’est pas significatif dans toutes les spécifications.",
   "gs_het": "Groupes séparés par la médiane nationale · estimations RD linéaires et intervalles à 90/95/99 %",
   "gs_lp": "Vocabulaire français et distance phonétique résiduelle par région historique · intervalles à 90/95/99 %",
   "gs_nb": "Participants à la Seconde Guerre mondiale par lieu de naissance et votes de 1969 · intervalles à 90/95/99 %",
   "gs_ref": "Estimations RD linéaires pour 577 communes de référence · 552 sont géolocalisées",
   "gs_tw": "Communes rurales de France métropolitaine dans la fenêtre de comparaison principale autour de 500 habitants, selon la population en 1836",
-  "gs_vocab": "Distance au français : Individus et actions (16 mots) contre Environnement naturel (14 mots) · estimations RD et intervalles à 90/95/99 %",
+  "gs_vocab": "Distance au français : Individus, corps et actions (16 mots) contre Environnement naturel (14 mots) · estimations RD et intervalles à 90/95/99 %",
   "h_by": "Par <b>Guillaume Blanc</b> (Simon Fraser University) et <b>Masahiro Kubo</b> (CNRS, CERDI)",
   "h_h1": "Français<span class=\"dot\">.</span>",
   "h_stand": "Au moment de la Révolution française, la plupart des habitants de France ne parlaient pas couramment français. Un siècle plus tard, la langue était largement répandue. Nous montrons comment <strong>l’affaiblissement du pouvoir des élites locales établies a aidé l’école publique à diffuser le français</strong>. Le français s’est davantage diffusé là où des élites instruites soutenaient l’école et où les familles avaient à y gagner : <strong>la coercition seule n’a pas forgé la nation.</strong>",
@@ -2511,9 +2520,9 @@ window.addEventListener("DOMContentLoaded", () => {
   renderBars = function(){
     originalRenderBars();
     if (R.worddomains && $("#vocab-chart")) languagePairBars("#vocab-chart", R.worddomains, {
-      labels: [T("Individuals / actions (16)", "Individus / actions (16)"),
-               T("Environment (14)", "Environnement (14)")],
-      labelLines: [[T("Individuals /", "Individus /"), T("actions (16)", "actions (16)")],
+      labels: [T("Individuals, the body, and actions (16)", "Individus, corps et actions (16)"),
+               T("Natural environment (14)", "Environnement naturel (14)")],
+      labelLines: [[T("Individuals,", "Individus,"), T("the body, and actions (16)", "corps et actions (16)")],
                    [T("Natural environment", "Environnement naturel"), T("(14 words)", "(14 mots)")]]
     });
   };
